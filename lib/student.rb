@@ -33,7 +33,6 @@ class Student < InteractiveRecord
 
 	def save
 		sql = "INSERT INTO #{table_name_for_insert} (#{col_names_for_insert}) VALUES (#{values_for_insert});"
-		# binding.pry
 		DB[:conn].execute(sql)
 		self.id = DB[:conn].execute('SELECT id FROM students ORDER BY id LIMIT 1;').first['id']
 	end
@@ -46,7 +45,6 @@ class Student < InteractiveRecord
 		col_name = hash.keys[0].to_s
 		value = hash.values[0]
 		sql = "SELECT * FROM students WHERE #{col_name} = '#{value}';"
-		# binding.pry
 		student = DB[:conn].execute(sql)
 	end
 
